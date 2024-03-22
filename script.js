@@ -19,7 +19,7 @@ const research = () => {
     })
 }
 
-// mots clés: température, type, lunes, distance
+// mots clés: température, lunes, distance
 let sortBy = () => {
   input = document.getElementById("sort").value
   if (input == "température") {
@@ -38,23 +38,7 @@ let sortBy = () => {
           document.getElementById("filter").innerHTML += data.bodies[i].name + " : " + data.bodies[i].avgTemp + " K°" + "<br>"
         }
       })
-  } else if (input == "type") {
-    fetch("https://api.le-systeme-solaire.net/rest/bodies?filter[]=isPlanet,eq,true&data=name,bodyType&order=bodyType,asc")
-      .then(function (response) {
-        if (response.ok) {
-          document.getElementById("filter").classList.add("visible")
-          return response.json()
-        }
-        console.log("success!", response)
-      })
-      .then(data => {
-        console.log(data)
-        document.getElementById("filter").innerHTML = ""
-        for (let i = 0; i < 8; i++) {
-          document.getElementById("filter").innerHTML += data.bodies[i].name + " : " + data.bodies[i].bodyType + "<br>"
-        }
-      })
-  } else if (input == "lunes") {
+  }  else if (input == "lunes") {
     fetch("https://api.le-systeme-solaire.net/rest/bodies?filter[]=isPlanet,eq,true&data=name,moons")
         .then(function (response) {
           if (response.ok) {
